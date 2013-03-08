@@ -1,3 +1,12 @@
+<?php
+	require_once 'core/config.php';
+	if (getUserID() !== $login_permission) {
+		if ($login_permission)
+			header('Location: index.php');
+		else
+			header('Location: dashboard.php');
+	}
+?>
 <!doctype html>
 
 <html>
@@ -17,7 +26,7 @@
 					<ul class="main-links">
 						<li class="dashboard-link"><a href="dashboard.php">Dashboard</a></li>
 						<li class="profile-link" id="profileLink"><a href="profile.php" id="userFullName">John Doe</a></li>
-						<li class="profile-link"><a href="index.php">Logout</a></li>
+						<li class="profile-link"><a href="logout.php">Logout</a></li>
 					</ul>
 
 					<div class="search-box">

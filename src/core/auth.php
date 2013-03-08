@@ -5,7 +5,6 @@
 	$password = $get['password'];
 	$hasil = query('SELECT * FROM user WHERE username = :username and password = :password',array('username' => $username, 'password' => $password));
 	if ($hasil) {
-		session_start();
 		$arr['success'] = true;
 		$_SESSION['user_id'] = (int)$hasil['user_id'];
 	} else

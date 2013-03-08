@@ -1,9 +1,5 @@
 <?php
-
-define ('USERID','$_SESSION["user_id"]');
-define ('QUERY','$stmt = $conn->prepare');
-define ('EXECUTE','$stmt->execute');
-define ('FETCH','$stmt->fetch()');
+session_start();
 
 function getUserID() {
 	return (isset($_SESSION["user_id"])?$_SESSION["user_id"]:0);

@@ -1,5 +1,6 @@
 <?php
-	$title = 'Homepage';
+	$title = 'View Tugas';
+	$login_permission = 1;
 	include 'inc/header.php';
 ?>
 		<div class="content">

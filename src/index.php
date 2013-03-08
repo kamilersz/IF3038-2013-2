@@ -1,5 +1,6 @@
 <?php
 	$title = 'Homepage';
+	$login_permission = 0;
 	include 'inc/header.php';
 ?>
 		<div class="content">
