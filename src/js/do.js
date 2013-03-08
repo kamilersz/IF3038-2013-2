@@ -1,6 +1,3 @@
-username = 'admin';
-password = 'admin';
-
 Rp(function() {
 	genComment = function(author, body) {
 		article = document.createElement('article');
@@ -38,13 +35,14 @@ Rp(function() {
 	Rp('#loginForm').on('submit', function(e) {
 
 		e.preventDefault();
-		validate = function() {
-			u = Rp('#login_username').val();
-			p = Rp('#login_password').val();
-			return u == username && p == password;
-		};
+		u = Rp('#login_username').val();
+		p = Rp('#login_password').val();
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.open("GET","core/auth.php?username="+u+"&password="+p,false);
+		xmlhttp.send();
+		var parsedJSON = eval('('+xmlhttp.responseText+')');
 
-		if (validate())
+		if (parsedJSON.success)
 			window.location.href = 'dashboard.php';
 		else
 			alert('Invalid username/password combination.');
