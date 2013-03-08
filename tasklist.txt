@@ -1,0 +1,189 @@
+SEARCH
+	by username
+	by judul kategori
+	by judul task
+		AND by comment
+	by tag
+	by email
+	by full name
+	by birthdate
+	
+SEARCH AUTOCOMPLETE
+	limit result by 3
+	
+GETTER
+	username
+	avatar
+	
+LOGIN
+	ajax authentication
+	verification matching
+
+LOGOUT
+
+HOMEPAGE
+	index.php
+	
+DASHBOARD
+	auto refresh
+	task display
+		nama task. klo diklik ke halaman rincian tugas
+		tanggal deadline
+		tag, multivalue
+		status task
+		checkbox
+		hapus task (apabila ia pembuat task)
+	
+TASK (MODEL)
+	Getter by user
+		AND filter by category using ajax
+	Setter done
+	Deleter
+	New Task
+		hanya muncul jika ada kategori yang sedang disorot
+	
+CATEGORY (MODEL)
+	New Category
+		nama kategori
+		daftar pengguna yang bisa mengubah
+	Deleter
+		hanya bisa dihapus oleh pembuatnya
+	User lain dapat menambah/mengurangi tugas dalam category
+	
+SEARCH RESULT
+	tampilan mirip halaman dashboard
+	by task
+		nama task. klo diklik ke halaman rincian tugas
+		tanggal deadline
+		tag, multivalue
+		status task
+		checkbox
+	by user account
+		username
+		full name
+		avatar
+	by category
+	result limited by 10
+	pagination dengan auto-generated content
+	
+HALAMAN RINCIAN TUGAS
+	atribut
+		nama task
+		status task
+		checkbox selesai atau tidak
+		attachment
+			video/gambar langsung ditampilkan
+			file berupa link
+			multi attachment
+		deadline (date)
+		assignee
+			mungkin kosong
+			kalo namanya diklik, ke halaman usernya
+		daftar komentar
+			jumlah komentar
+			avatar komentator
+			waktu komentar hh:mm - DD/MM
+			isi komentar
+			sort dari terlama sd terbaru
+			tombol hapus | penulis komentar bisa menghapus
+			paginasi - limit per 10 komentar
+		input komentar
+			update via ajax
+			distore ke database, lalu ditambahin
+		tags
+	tombol edit task
+		mengubah assignee
+			penambahan dan autocomplete per ketikan keyboard
+			menghapus assignee
+		mengubah tanggal deadline
+		mengubah tag (pake autocomplete)
+			menambah
+			mengedit
+			menghapus
+		menghapus task
+			bisa sama creator atau assignee
+		realtime edit pake ajax
+			
+HALAMAN PEMBUATAN TUGAS
+	nama tugas
+		huruf dan angka
+		maksimal 25 karakter
+	attachment
+		image
+		video
+		file
+		multi attachment
+	deadline
+		datepicker
+	assignee
+		penambahan dan autocomplete per ketikan keyboard
+		menghapus assignee
+	tag
+		lebih dari satu
+		dipisah dengan koma
+	setelah submit, diredirect ke halaman rincian tugas
+	
+HALAMAN PROFIL
+	attribut
+		username
+		full name
+		avatar
+		tanggal lahir
+		email
+		task list
+			task yang sudah diselesaikan
+			task yang sedang dikerjakan
+	edit profile
+		full name
+		upload new avatar
+		change birth date
+		change password
+		confirm change password
+		validasi
+		
+DATABASE DESIGN
+Tables
+	create table user (
+		user_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		username varchar(100),
+		password varchar(100),
+		name varchar(25),
+		birthdate date,
+		email varchar(100)
+	);
+	create table task (
+		task_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		category_id int,
+		name varchar(25),
+		deadline date
+	);
+	create table tag (
+		tag_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		name varchar(25)
+	);
+	create table tags (
+		id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		task_id int,
+		tag_id int
+	);
+	create table assign (
+		id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		task_id int,
+		user_id int
+	);
+	create table attachment (
+		id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		task_id int,
+		filename varchar(100)
+	);
+	create table category (
+		category_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		name varchar(25)
+	);
+	create table comment (
+		comment_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		task_id int,
+		content text,
+		time timestamp
+	);
+DATAS
