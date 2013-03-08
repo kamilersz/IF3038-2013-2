@@ -45,7 +45,7 @@ Rp(function() {
 		};
 
 		if (validate())
-			window.location.href = 'dashboard.html';
+			window.location.href = 'dashboard.php';
 		else
 			alert('Invalid username/password combination.');
 	});
