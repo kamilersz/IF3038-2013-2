@@ -8,10 +8,10 @@
 				<header>
 					<h1>John Doe</h1>
 					<ul>
-						<li class="edit-profile-link"><a href="#" id="editProfileButton">Edit Profile</a></li>
+						<li class="edit-profile-link"><a href="#editProfile" id="editProfileButton">Edit Profile</a></li>
 					</ul>
 				</header>
-
+				<!--<div class="current-profile">-->
 				<section class="profile-details">
 					<figure class="profile-image">
 						<img src="assets/photo.jpg" alt="Profile Photo">
@@ -246,6 +246,34 @@
 					</article>
 
 				</section>
+				<!--</div>-->
+				<!--<div class="edit_profile">
+					<form id="new_profile" action="#editProfile" method="post">
+						<div class="field">
+							<label>Username</label>
+							<input name="nama" id="nama" type="text">
+						</div>
+						<div class="field">
+								<label>New Avatar</label>
+								<input name="avatar" id="avatar" type="file" accept="image/jpg">
+						</div>
+						<div class="field">
+								<label>Tanggal Lahir Baru</label>
+								<input name="tanggal_lahir" id="tanggal_lahir" type="date">
+							</div>
+						<div class="field">
+								<label>New Password</label>
+								<input size="30" maxlength="50" name="password" id="password" type="password">
+							</div>
+							<div class="field">
+								<label>Confirm New Password</label>
+								<input size="30" maxlength="50" name="password_k" id="password_k" type="password">
+							</div>
+						<div class="buttons">
+							<button type="submit">Save</button>
+						</div>
+					</form>
+				</div>-->
 			</div>
 		</div>
 <?php
