@@ -5,11 +5,38 @@ function getUserID() {
 	return (isset($_SESSION["user_id"])?$_SESSION["user_id"]:0);
 }
 
+function findById($table,$id) {
+	return query('select * from '.$table.' where '.$table.'_id = :id',array('id' => $id));
+}
+
+function getUserName($user_id) {
+	$row = findById('user',$user_id);
+	return $row['name'];
+}
+
+function getTagName($tag_id) {
+	$row = findById('tag',$tag_id);
+	return $row['name'];
+}
+
 function query($statement,$cond) {
 	$conn = Db::handler();
 	$stmt = $conn->prepare($statement);
 	$stmt->execute($cond);
 	return $stmt->fetch();
+}
+
+function queryn($statement,$cond) {
+	$conn = Db::handler();
+	$stmt = $conn->prepare($statement);
+	$stmt->execute($cond);
+}
+
+function queryAll($statement,$cond) {
+	$conn = Db::handler();
+	$stmt = $conn->prepare($statement);
+	$stmt->execute($cond);
+	return $stmt->fetchAll();
 }
 
 class Db

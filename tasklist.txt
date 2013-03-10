@@ -16,10 +16,11 @@ GETTER
 	avatar
 	
 LOGIN
-	ajax authentication
-	verification matching
+v	ajax authentication
+v	verification matching
 
 LOGOUT
+v
 
 HOMEPAGE
 	index.php
@@ -67,30 +68,30 @@ SEARCH RESULT
 	pagination dengan auto-generated content
 	
 HALAMAN RINCIAN TUGAS
-	atribut
-		nama task
-		status task
-		checkbox selesai atau tidak
-		attachment
-			video/gambar langsung ditampilkan
-			file berupa link
-			multi attachment
-		deadline (date)
-		assignee
-			mungkin kosong
-			kalo namanya diklik, ke halaman usernya
-		daftar komentar
-			jumlah komentar
-			avatar komentator
-			waktu komentar hh:mm - DD/MM
-			isi komentar
-			sort dari terlama sd terbaru
-			tombol hapus | penulis komentar bisa menghapus
-			paginasi - limit per 10 komentar
-		input komentar
-			update via ajax
-			distore ke database, lalu ditambahin
-		tags
+v	atribut
+v		nama task
+v		status task
+v		checkbox selesai atau tidak
+v		attachment
+v			video/gambar langsung ditampilkan
+v			file berupa link
+v			multi attachment
+v		deadline (date)
+v		assignee
+v			mungkin kosong
+v			kalo namanya diklik, ke halaman usernya
+v		daftar komentar
+v			jumlah komentar
+v			avatar komentator
+v			waktu komentar hh:mm - DD/MM
+v			isi komentar
+v			sort dari terlama sd terbaru
+v			tombol hapus | penulis komentar bisa menghapus
+v			paginasi - limit per 10 komentar
+v		input komentar
+v			update via ajax
+v			distore ke database, lalu ditambahin
+v		tags
 	tombol edit task
 		mengubah assignee
 			penambahan dan autocomplete per ketikan keyboard
@@ -155,7 +156,8 @@ Tables
 		task_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		category_id int,
 		name varchar(25),
-		deadline date
+		deadline date,
+		done tinyint(1)
 	);
 	create table tag (
 		tag_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
