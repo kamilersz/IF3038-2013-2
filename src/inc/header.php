@@ -28,10 +28,18 @@
 						<li class="profile-link" id="profileLink"><a href="profile.php" id="userFullName">John Doe</a></li>
 						<li class="profile-link"><a href="logout.php">Logout</a></li>
 					</ul>
-
 					<div class="search-box">
+						<select name="mode" id="searchMode">
+							<option value="0">All</option>
+							<option value="1">User</option>
+							<option value="2">Kategori</option>
+							<option value="3">Task</option>
+							<option value="4">Komentar</option>
+						</select>
 						<form action="search.php" method="get" id="searchForm">
-							<input type="search" name="q" placeholder="Search">
+							<input type="search" id="searchBar" name="q" placeholder="Search" list="suggestion">
+							<datalist id="suggestion">
+							</datalist>
 							<button type="submit">Search</button>
 						</form>
 					</div>

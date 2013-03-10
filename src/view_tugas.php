@@ -93,10 +93,6 @@
 							<input size="25" maxlength="25" name="nama" id="nama" type="text">
 						</div>
 						<div class="field">
-							<label>Attachment</label>
-							<input name="attachment" id="attachment" type="file">
-						</div>
-						<div class="field">
 							<label>Deadline</label>
 							<input name="deadline" id="deadline" type="date">
 						</div>

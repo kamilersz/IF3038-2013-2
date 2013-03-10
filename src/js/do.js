@@ -47,6 +47,26 @@ Rp(function() {
 		return article;
 	};
 
+	Rp('#searchBar').on('keyup', function() {
+		q = this.value;
+		e = document.getElementById('searchMode');
+		mode = e.options[e.selectedIndex].value;
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				var parsedJSON = eval('('+xmlhttp.responseText+')');
+				document.getElementById("suggestion").innerHTML = "";
+				for (index=0; index < parsedJSON.length; index++) {
+					document.getElementById("suggestion").innerHTML += '<option value="'+parsedJSON[index].q+'">\n'
+					console.log(parsedJSON[index].q);
+				}
+			}
+		}
+		xmlhttp.open("GET","core/search.php?q="+q+"&mode="+mode,true);
+		xmlhttp.send();
+		console.log(q);
+	});
+
 	Rp('#commentForm').on('submit', function(e) {
 		e.preventDefault();
 		body = Rp('#commentBody').val();
