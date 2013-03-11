@@ -86,10 +86,10 @@
 							</div>
 							<div class="field">
 								<label>Avatar</label>
-								<input name="avatar" id="avatar" type="file" accept="image/jpg">
+								<input name="avatar" id="avatar" type="file" accept="image/jpeg">
 							</div>
 							<div class="field buttons">
-								<button type="submit" name="register_dong" id="submitButton">Register</button>
+								<button type="submit" name="register_dong" id="submitButton" disabled>Register</button>
 							</div>
 						</form>
 					</section>

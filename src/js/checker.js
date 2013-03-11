@@ -5,7 +5,7 @@ Rp(function() {
 		if (match&&(this.value!=Rp('#password').val())) {
 			// bener
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttr('disabled');
+			Rp('#submitButton').removeAttribute('disabled');
 		}
 		else {
 			// ga valid
@@ -19,7 +19,7 @@ Rp(function() {
 		if ((this.value != Rp('#email').val())&&match){
 			//valid
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttr('disabled');
+			Rp('#submitButton').removeAttribute('disabled');
 		}else{
 			//error
 			console.log('Invalid');
@@ -32,7 +32,7 @@ Rp(function() {
 		if( (this.value!=Rp('#username').val())&&(this.value!=Rp('#email').val())&&match ){
 			//valid
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttr('disabled');
+			Rp('#submitButton').removeAttribute('disabled');
 		}else{
 			//error
 			console.log('Invalid');
@@ -44,7 +44,7 @@ Rp(function() {
 		if(this.value==Rp('#password').val()){
 			//valid
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttr('disabled');
+			Rp('#submitButton').removeAttribute('disabled');
 		}else{
 			//error
 			console.log('Invalid');
@@ -63,7 +63,7 @@ Rp(function() {
 		}else{
 			//valid
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttr('disabled');
+			Rp('#submitButton').removeAttribute('disabled');
 		}
 	});
 });

@@ -1,19 +1,19 @@
 SEARCH
-	by username
-	by judul kategori
-	by judul task
-		AND by comment
-	by tag
-	by email
-	by full name
-	by birthdate
+v	by username
+v	by judul kategori
+v	by judul task
+v		AND by comment
+v	by tag
+v	by email
+v	by full name
+v	by birthdate
 	
 SEARCH AUTOCOMPLETE
-	limit result by 3
+v	limit result by 3
 	
 GETTER
-	username
-	avatar
+v	username
+v	avatar
 	
 LOGIN
 v	ajax authentication
@@ -23,27 +23,28 @@ LOGOUT
 v
 
 HOMEPAGE
-	index.php
+v	index.php
 	
 DASHBOARD
-	auto refresh
-	task display
-		nama task. klo diklik ke halaman rincian tugas
-		tanggal deadline
-		tag, multivalue
-		status task
-		checkbox
-		hapus task (apabila ia pembuat task)
+v	auto refresh
+v	task display
+v		nama task. klo diklik ke halaman rincian tugas
+v		tanggal deadline
+v		tag, multivalue
+v		status task
+v		checkbox
+v		hapus task (apabila ia pembuat task)
 	
 TASK (MODEL)
-	Getter by user
-		AND filter by category using ajax
-	Setter done
-	Deleter
+v	Getter by user
+v		AND filter by category using ajax
+v	Setter done
+v	Deleter
 	New Task
 		hanya muncul jika ada kategori yang sedang disorot
 	
 CATEGORY (MODEL)
+v	Getter by user
 	New Category
 		nama kategori
 		daftar pengguna yang bisa mengubah

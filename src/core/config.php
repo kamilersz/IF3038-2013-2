@@ -14,6 +14,11 @@ function getUserName($user_id) {
 	return $row['name'];
 }
 
+function getUserUsername($user_id) {
+	$row = findById('user',$user_id);
+	return $row['username'];
+}
+
 function getTagName($tag_id) {
 	$row = findById('tag',$tag_id);
 	return $row['name'];

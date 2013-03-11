@@ -511,6 +511,14 @@ p.description .detail-label {
 .profile-image img {
 	max-width: 100%;
 }
+.imgProfileLink{
+	float: left;
+	max-width: 20px;
+	margin-left: 5px;
+	padding: 0;
+	position: relative;
+	z-index: 2;
+}
 
 /** Responsive design **/
 
