@@ -513,11 +513,15 @@ p.description .detail-label {
 }
 .imgProfileLink{
 	float: left;
-	max-width: 20px;
+	max-width: 32px;
 	margin-left: 5px;
-	padding: 0;
+	margin-top: -5px;
+	padding-right: 3px;
 	position: relative;
 	z-index: 2;
+	-webkit-border-radius: 0.4em;
+	-moz-border-radius: 0.4em;
+	border-radius: 0.4em;
 }
 
 /** Responsive design **/
