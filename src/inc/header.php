@@ -1,11 +1,9 @@
 <?php
 	require_once 'core/config.php';
-	if (getUserID() !== $login_permission) {
-		if ($login_permission)
-			header('Location: index.php');
-		else
-			header('Location: dashboard.php');
-	}
+	if ($login_permission && !getUserId())
+		header('Location: index.php');
+	if (!$login_permission && getUserId())
+		header('Location: dashboard.php');
 ?>
 <!doctype html>
 
@@ -24,24 +22,30 @@
 
 				<nav>
 					<ul class="main-links">
+						<?php if (getUserId() !== 0) : ?>
 						<li class="dashboard-link"><a href="dashboard.php">Dashboard</a></li>
-						<li class="profile-link" id="profileLink"><a href="profile.php" id="userFullName">John Doe</a></li>
+						<li class="profile-link" id="profileLink"><a href="profile.php?user_id=<?php echo getUserID(); ?>" id="userFullName"><img src="avatar/<?php echo getUserID(); ?>.jpg" class="imgProfileLink"><?php echo getUserUsername(getUserID()); ?></a></li>
 						<li class="profile-link"><a href="logout.php">Logout</a></li>
+						<?php else: ?>
+						<li class="dashboard-link"><a href="index.php">Home</a></li>
+						<?php endif; ?>
 					</ul>
+					<?php if (getUserId() !== 0) : ?>
 					<div class="search-box">
-						<select name="mode" id="searchMode">
-							<option value="0">All</option>
-							<option value="1">User</option>
-							<option value="2">Kategori</option>
-							<option value="3">Task</option>
-							<option value="4">Komentar</option>
-						</select>
 						<form action="search.php" method="get" id="searchForm">
+							<select name="mode" id="searchMode">
+								<option value="0">All</option>
+								<option value="1">User</option>
+								<option value="2">Kategori</option>
+								<option value="3">Task</option>
+								<option value="4">Komentar</option>
+							</select>
 							<input type="search" id="searchBar" name="q" placeholder="Search" list="suggestion">
 							<datalist id="suggestion">
 							</datalist>
 							<button type="submit">Search</button>
 						</form>
 					</div>
+					<?php endif; ?>
 				</nav>
 			</header>
