@@ -23,7 +23,9 @@
 					</div>
 					<div class="field">
 						<label>Assignee</label>
-						<input name="assignee" id="assignee" type="text" list="friends">
+						<input name="assignee[]" id="assignee" type="text" list="friends"><br>
+						<label></label>
+						<input name="assignee[]" id="assignee" type="text" list="friends"><br>
 						<datalist id="friends">
 							<option value="Irfan Kamil">
 							<option value="Tubagus Andhika Nugraha">
