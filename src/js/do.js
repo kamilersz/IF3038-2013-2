@@ -249,7 +249,7 @@ function refreshComment(task_id,page){
 function refreshTask(user_id,category_id){
 	_category_id = category_id;
 	xmlhttp=new XMLHttpRequest();
-	xmlhttp.open("GET","core/getTask.php?user_id="+user_id+"&category_id="+category_id+"&done=0",false);
+	xmlhttp.open("GET","core/getTask.php?user_id="+user_id+"&category_id="+category_id,false);
 	xmlhttp.send();
 	var parsedJSON = eval('('+xmlhttp.responseText+')');
 	header = document.createElement('header');
