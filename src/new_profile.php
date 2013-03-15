@@ -8,7 +8,7 @@
 				<header>
 					<h1>New Profile</h1>
 				</header>
-				<form id="new_profile" action="#editProfile" method="post">
+				<form id="new_profile" action="profile.php" method="post">
 						<div class="field">
 							<label>Username</label>
 							<input name="nama" id="nama" type="text">
