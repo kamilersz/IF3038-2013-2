@@ -513,6 +513,7 @@ p.description .detail-label {
 .imgProfileLink{
 	float: left;
 	max-width: 32px;
+	max-height: 32px;
 	margin-left: 5px;
 	margin-top: -5px;
 	padding-right: 3px;
@@ -529,19 +530,19 @@ p.description .detail-label {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 200;
-  src: local('Source Sans Pro ExtraLight'), local('SourceSansPro-ExtraLight'), url(../assets/SourceSansPro-ExtraLight.woff) format('woff');
+  src: local('Source Sans Pro ExtraLight'), local('SourceSansPro-ExtraLight'), url(../assets/font.php?filename=SourceSansPro-ExtraLight.woff) format('woff');
 }
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
-  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(../assets/SourceSansPro-Regular.woff) format('woff');
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(../assets/font.php?filename=SourceSansPro-Regular.woff) format('woff');
 }
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 600;
-  src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url(../assets/SourceSansPro-Semibold.woff) format('woff');
+  src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url(../assets/font.php?filename=SourceSansPro-Semibold.woff) format('woff');
 }
 
 
