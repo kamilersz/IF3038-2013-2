@@ -58,7 +58,10 @@ Rp(function() {
 		chkbox = document.createElement('input');
 		chkbox.className = 'task-checkbox';
 		chkbox.setAttribute('type', 'checkbox');
-		chkbox.setAttribute('onclick', 'negateTask('+task.task_id+'); refreshTask('+_user_id+','+_category_id+')');
+		if (typeof _category_id !== "undefined")
+			chkbox.setAttribute('onclick', 'negateTask('+task.task_id+'); refreshTask('+_user_id+','+_category_id+')');
+		else
+			chkbox.setAttribute('onclick', 'negateTask('+task.task_id+');');
 		if (task.done == 1)
 			chkbox.setAttribute('checked');
 		span.appendChild(chkbox);
@@ -113,6 +116,58 @@ Rp(function() {
 		return article;
 	};
 
+	genCategory = function(category) {
+		article = document.createElement('article');
+		article.className = 'task';
+		header = document.createElement('header');
+		h1 = document.createElement('h1');
+		label = document.createElement('label');
+		title = document.createElement('a');
+		title.appendChild(document.createTextNode(category.name));
+		title.setAttribute('href','dashboard.php');
+		label.appendChild(title);
+		h1.appendChild(label);
+		header.appendChild(h1);
+
+		article.appendChild(header);
+
+		return article;
+	};
+	genUser = function(user) {
+		article = document.createElement('article');
+		article.className = 'task';
+		header = document.createElement('header');
+		h1 = document.createElement('h1');
+		label = document.createElement('label');
+		span = document.createElement('span');
+		span.className = 'imgAvatar';
+		imgAvatar = document.createElement('img');
+		imgAvatar.className = 'imgProfileLink';
+		imgAvatar.setAttribute('src', 'avatar/'+user.user_id+'.jpg');
+		span.appendChild(imgAvatar);
+		title = document.createElement('a');
+		title.appendChild(document.createTextNode(user.username));
+		title.setAttribute('href','profile.php?user_id='+user.user_id);
+		label.appendChild(span);
+		label.appendChild(title);
+		h1.appendChild(label);
+		header.appendChild(h1);
+		
+		details = document.createElement('div');
+		details.className = 'details';
+		p = document.createElement('p');
+		p.className = 'name';
+		p.appendChild(document.createTextNode(user.name));
+				
+		details.appendChild(p);
+		
+		article.appendChild(header);
+		article.appendChild(details);
+
+		return article;
+	};
+
+
 	Rp('#searchBar').on('keyup', function() {
 		q = this.value;
 		e = document.getElementById('searchMode');
@@ -124,13 +179,11 @@ Rp(function() {
 				document.getElementById("suggestion").innerHTML = "";
 				for (index=0; index < parsedJSON.length; index++) {
 					document.getElementById("suggestion").innerHTML += '<option value="'+parsedJSON[index].q+'">\n'
-					console.log(parsedJSON[index].q);
 				}
 			}
 		}
-		xmlhttp.open("GET","core/search.php?q="+q+"&mode="+mode,true);
+		xmlhttp.open("GET","core/search.php?q="+q+"&mode="+mode+"&autocomplete=1",true);
 		xmlhttp.send();
-		console.log(q);
 	});
 
 	Rp('#commentForm').on('submit', function(e) {
@@ -167,6 +220,23 @@ Rp(function() {
 		else
 			alert('Invalid username/password combination.');
 	});
+
+	Rp('#newCategoryForm').on('submit', function(e) {
+
+		e.preventDefault();
+		u = Rp('#category_name').val();
+		p = Rp('#login_password').val();
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.open("GET","core/auth.php?username="+u+"&password="+p,false);
+		xmlhttp.send();
+		var parsedJSON = eval('('+xmlhttp.responseText+')');
+
+		if (parsedJSON.success)
+			window.location.href = 'dashboard.php';
+		else
+			alert('Invalid username/password combination.');
+	});
+	
 	Rp('#editTaskLink').on('click', function(e) {
 		e.preventDefault();
 
@@ -297,4 +367,78 @@ function refreshCategory(user_id){
 	}
 	if (parsedJSON.length == 0)
 		document.getElementById('categoryList').innerHTML += 'No Category Available!';
+}
+
+function getSearchResult(q,mode,page){
+	_page = page+1;
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET","core/search.php?q="+q+"&mode="+mode+"&autocomplete=0&offset="+page*10,false);
+	xmlhttp.send();
+	var parsedJSON = eval('('+xmlhttp.responseText+')');
+	for (index=0; index < parsedJSON.length; index++) {
+		if (parsedJSON[index].type == 'task') {
+			if (!tasks) {
+				header = document.createElement('header');
+				h3 = document.createElement('h3');
+				h3.appendChild(document.createTextNode('Tasks'));
+				header.appendChild(h3);
+				document.getElementById('searchResult').innerHTML += header.outerHTML;
+				tasks = true;
+			}
+			elsearch = genTask(parsedJSON[index]);
+		} else {
+			if (parsedJSON[index].type == 'user') {
+				if (!users) {
+					header = document.createElement('header');
+					h3 = document.createElement('h3');
+					h3.appendChild(document.createTextNode('Users'));
+					header.appendChild(h3);
+					document.getElementById('searchResult').innerHTML += header.outerHTML;
+					users = true;
+				}
+				elsearch = genUser(parsedJSON[index]);
+			} else {
+				if (!categories) {
+					header = document.createElement('header');
+					h3 = document.createElement('h3');
+					h3.appendChild(document.createTextNode('Categories'));
+					header.appendChild(h3);
+					document.getElementById('searchResult').innerHTML += header.outerHTML;
+					categories = true;
+				}
+				elsearch = genCategory(parsedJSON[index]);
+			}
+		}
+		document.getElementById('searchResult').innerHTML += elsearch.outerHTML;
+	}
+	if (parsedJSON.length == 0) {
+		if (page == 0)
+			document.getElementById('searchResult').innerHTML += 'No search result!';
+		_done = true;
+	}
+}
+
+function loadMoreSearch(){
+    var myWidth = 0,
+        myHeight = 0;
+	if (typeof(window.innerWidth) == 'number') {
+        //Non-IE
+        myWidth = window.innerWidth;
+        myHeight = window.innerHeight;
+    } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+        //IE 6+ in 'standards compliant mode'
+        myWidth = document.documentElement.clientWidth;
+        myHeight = document.documentElement.clientHeight;
+    }
+    var scrolledtonum = window.pageYOffset + myHeight + 2;
+    var heightofbody = document.body.offsetHeight;
+    if (scrolledtonum >= heightofbody) {
+		if (!_done) {
+			getSearchResult(_q,_mode,_page);
+			console.log('more loaded');
+		} else {
+			console.log('cant load again');
+		}
+    }
+
 }

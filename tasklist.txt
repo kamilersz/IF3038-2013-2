@@ -53,20 +53,20 @@ v	Getter by user
 	User lain dapat menambah/mengurangi tugas dalam category
 	
 SEARCH RESULT
-	tampilan mirip halaman dashboard
-	by task
-		nama task. klo diklik ke halaman rincian tugas
-		tanggal deadline
-		tag, multivalue
-		status task
-		checkbox
-	by user account
-		username
-		full name
-		avatar
-	by category
-	result limited by 10
-	pagination dengan auto-generated content
+v	tampilan mirip halaman dashboard
+v	by task
+v		nama task. klo diklik ke halaman rincian tugas
+v		tanggal deadline
+v		tag, multivalue
+v		status task
+v		checkbox
+v	by user account
+v		username
+v		full name
+v		avatar
+v	by category
+v	result limited by 10
+v	pagination dengan auto-generated content
 	
 HALAMAN RINCIAN TUGAS
 v	atribut
