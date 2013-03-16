@@ -6,7 +6,7 @@
 		<div class="content">
 			<div class="profile">
 				<header>
-					<h1>John Doe</h1>
+					<h1><?php echo getUserName(getUserID()); ?></h1>
 					<ul>
 						<li class="edit-profile-link"><a href="new_profile.php" id="editProfileButton">Edit Profile</a></li>
 					</ul>
@@ -21,12 +21,22 @@
 					</p>
 					<p class="username">
 						<span class="detail-label">Username:</span>
-						<span class="detail-value">hawawawa</span>
+						<span class="detail-value"><?php echo getUserUsername(getUserID()); ?></span>
+					</p>
+					
+					<p class="name">
+						<span class="detail-label">Full Name:</span>
+						<span class="detail-value"><?php echo getUserFullname(getUserID()); ?></span>
+					</p>
+					
+					<p class="email">
+						<span class="detail-label">Email:</span>
+						<span class="detail-value"><?php echo getUserEmail(getUserID()); ?></span>
 					</p>
 
 					<p class="date-of-birth">
 						<span class="detail-label">Date of Birth:</span>
-						<span class="detail-value">8 Desember 1992</span>
+						<span class="detail-value"><?php echo getUserBirthdate(getUserID()); ?></span>
 					</p>
 				</section>
 
@@ -245,6 +255,7 @@
 					</article>
 
 				</section>
+				
 				</div>
 				
 			</div>

@@ -11,15 +11,15 @@
 				<form id="new_profile" action="profile.php" method="post">
 						<div class="field">
 							<label>Username</label>
-							<input name="nama" id="nama" type="text">
+							<input size="30" maxlength="50" name="username" id="username" type="text">
 						</div>
 						<div class="field">
 								<label>New Avatar</label>
-								<input name="avatar" id="avatar" type="file" accept="image/jpg">
+								<input name="avatar" id="avatar" type="file" accept="image/jpeg">
 						</div>
 						<div class="field">
 								<label>Tanggal Lahir Baru</label>
-								<input name="tanggal_lahir" id="tanggal_lahir" type="date">
+								<input size = "30" name="tanggal_lahir" id="tanggal_lahir" type="date">
 							</div>
 						<div class="field">
 								<label>New Password</label>

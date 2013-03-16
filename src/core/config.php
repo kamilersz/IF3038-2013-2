@@ -19,6 +19,21 @@ function getUserUsername($user_id) {
 	return $row['username'];
 }
 
+function getUserBirthdate($user_id) {
+	$row = findById('user',$user_id);
+	return $row['birthdate'];
+}
+
+function getUserFullname($user_id) {
+	$row = findById('user',$user_id);
+	return $row['name'];
+}
+
+function getUserEmail($user_id) {
+	$row = findById('user',$user_id);
+	return $row['email'];
+}
+
 function getTagName($tag_id) {
 	$row = findById('tag',$tag_id);
 	return $row['name'];
