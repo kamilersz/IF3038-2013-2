@@ -52,6 +52,13 @@ function queryn($statement,$cond) {
 	$stmt->execute($cond);
 }
 
+function querynid($statement,$cond) {
+	$conn = Db::handler();
+	$stmt = $conn->prepare($statement);
+	$stmt->execute($cond);
+	return $conn->lastInsertId();
+}
+
 function queryAll($statement,$cond) {
 	$conn = Db::handler();
 	$stmt = $conn->prepare($statement);

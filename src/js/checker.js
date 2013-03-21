@@ -1,71 +1,91 @@
 Rp(function() {
 	Rp('#email').on('keyup', function() {
 		//javascript email regex from regularexpressionsrightnow.com
-		match = this.value.match(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|”(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*”)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/);
-		if (match&&(this.value!=Rp('#password').val())) {
+		var match = this.value.match(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|”(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*”)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/);
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.open("GET","core/search.php?q="+this.value+"&mode=8&equals=1",false);
+		xmlhttp.send();
+		var parsedJSON = eval('('+xmlhttp.responseText+')');
+		if (match&&(this.value!=Rp('#password').val())&&typeof parsedJSON.q === "undefined") {
 			// bener
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttribute('disabled');
+			_email = true;
 		}
 		else {
 			// ga valid
-			console.log('Invalid');
+			console.log('Invalid email');
 			Rp(this).addClass('invalid');
-			Rp('#submitButton').attr('disabled', 'disabled');
+			_email = false;
 		}
+		validateRegistration();
 	});
 	Rp('#username').on('keyup', function() {
-		match = this.value.match(/.{5,}/);
-		if ((this.value != Rp('#email').val())&&match){
+		var match = this.value.match(/.{5,}/);
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.open("GET","core/search.php?q="+this.value+"&mode=7&equals=1",false);
+		xmlhttp.send();
+		var parsedJSON = eval('('+xmlhttp.responseText+')');
+		if ((this.value != Rp('#email').val())&&match&&typeof parsedJSON.q === "undefined"){
 			//valid
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttribute('disabled');
+			_username = true;
 		}else{
 			//error
-			console.log('Invalid');
+			console.log('Invalid username');
 			Rp(this).addClass('invalid');
-			Rp('#submitButton').attr('disabled', 'disabled');
+			_username = false;
 		}
+		validateRegistration();
 	});
 	Rp('#password').on('keyup',function(){
-		match = this.value.match(/.{8,}/);
+		var match = this.value.match(/.{8,}/);
 		if( (this.value!=Rp('#username').val())&&(this.value!=Rp('#email').val())&&match ){
 			//valid
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttribute('disabled');
+			_password = true;
 		}else{
 			//error
-			console.log('Invalid');
+			console.log('Invalid password');
 			Rp(this).addClass('invalid');
-			Rp('#submitButton').attr('disabled', 'disabled');
+			_password = false
 		}
+		validateRegistration();
 	});
 	Rp('#password_k').on('keyup',function(){
-		if(this.value==Rp('#password').val()){
+		if(this.value==Rp('#password').val() && _password){
 			//valid
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttribute('disabled');
+			_password2 = true;
 		}else{
 			//error
-			console.log('Invalid');
+			console.log('Invalid password2');
 			Rp(this).addClass('invalid');
-			Rp('#submitButton').attr('disabled', 'disabled');
+			_password2 = false;
 		}
+		validateRegistration();
 	});
-	Rp('#nama').on('keyup', function() {
-		match = this.value.match(/\W/g);
-		console.log(match);
-		if (match){
+	Rp('#nama_lengkap').on('keyup', function() {
+		var match = this.value.match(/^[A-z]([-']?[A-z]+)*( [A-z]([-']?[A-z]+)*)+$/);
+		if (!match){
 			//error
-			console.log('Invalid');
+			console.log('Invalid nama');
 			Rp(this).addClass('invalid');
-			Rp('#submitButton').attr('disabled', 'disabled');
+			_name = false;
 		}else{
 			//valid
 			Rp(this).removeClass('invalid');
-			Rp('#submitButton').removeAttribute('disabled');
+			_name = true;
 		}
+		validateRegistration();
 	});
+	function validateRegistration(){
+		if (_email && _username && _password && _password2 && _name){
+			//valid
+			Rp('#submitButton').removeAttribute('disabled');
+		}else{
+			Rp('#submitButton').attr('disabled', 'disabled');
+		}
+	}
 });
 
 // settings

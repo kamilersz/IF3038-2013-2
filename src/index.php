@@ -3,6 +3,13 @@
 	$login_permission = 0;
 	include 'inc/header.php';
 ?>
+		<script>
+			_username = false;
+			_password = false;
+			_password2 = false;
+			_name = false;
+			_email = false;
+		</script>
 		<div class="content">
 			<div class="index">	
 				<header>
@@ -59,7 +66,7 @@
 							<h3>Sign Up Now!</h3>
 						</header>
 
-						<form id="register" action="#" method="post" class="vertical">
+						<form id="register" action="register.php" method="post" class="vertical" enctype="multipart/form-data">
 							<div class="field">
 								<label>Username</label>
 								<input size="30" maxlength="50" name="username" id="username" type="text">
